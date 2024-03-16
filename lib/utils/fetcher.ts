@@ -41,6 +41,7 @@ export const fetchProposalDocuments = async ({
         eta
         governor {
           name
+          quorum
         }
         voteStats {
           support
