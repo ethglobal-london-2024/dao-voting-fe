@@ -21,14 +21,11 @@ export async function generateMetadata({
       },
       {
         label: 'Abstain'
-      },
-      {
-        label: 'Refresh'
       }
     ],
     image: {
-      src: `${env.NEXT_PUBLIC_URL}/api/images/proposal/${chain_id}/${proposal_id}`,
-      aspectRatio: '1:1'
+      src: `${env.NEXT_PUBLIC_URL}/api/images/proposal/${chain_id}/${proposal_id}`
+      // aspectRatio: '1:1'
     },
     postUrl: `${env.NEXT_PUBLIC_URL}/api/proposal/${chain_id}/${proposal_id}`
   });

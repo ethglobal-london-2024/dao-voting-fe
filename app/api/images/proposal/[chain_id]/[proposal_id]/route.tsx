@@ -1,3 +1,4 @@
+import { logo_url } from '@/lib/utils';
 import { fetchProposalDocuments } from '@/lib/utils/fetcher';
 import { ImageResponse } from 'next/og';
 
@@ -13,22 +14,23 @@ export async function GET(
   request: Request,
   { params }: { params: { chain_id: string; proposal_id: string } }
 ) {
+  console.log('ne we');
   try {
-    const response = await fetchProposalDocuments({
-      chain_id: params.chain_id,
-      proposal_id: params.proposal_id
-    });
-    const proposal = response.proposals[0];
+    // const response = await fetchProposalDocuments({
+    //   chain_id: params.chain_id,
+    //   proposal_id: params.proposal_id
+    // });
+    // const proposal = response.proposals[0];
 
     const logo = logoMapping[Number(params.chain_id)];
 
-    const vote_for = proposal.voteStats.find((e: any) => e.support === 'FOR');
-    const vote_against = proposal.voteStats.find(
-      (e: any) => e.support === 'AGAINST'
-    );
-    const vote_abstain = proposal.voteStats.find(
-      (e: any) => e.support === 'ABSTAIN'
-    );
+    // const vote_for = proposal.voteStats.find((e: any) => e.support === 'FOR');
+    // const vote_against = proposal.voteStats.find(
+    //   (e: any) => e.support === 'AGAINST'
+    // );
+    // const vote_abstain = proposal.voteStats.find(
+    //   (e: any) => e.support === 'ABSTAIN'
+    // );
 
     return new ImageResponse(
       (
@@ -42,61 +44,211 @@ export async function GET(
             alignItems: 'center',
             flexDirection: 'column',
             flexWrap: 'nowrap',
-            backgroundImage:
-              'linear-gradient(to right top, #051937, #004d7a, #008793, #00bf72, #a8eb12)'
+            background: 'white',
+            paddingBottom: 0
           }}
         >
           <div
             style={{
-              width: '100%',
-              position: 'absolute',
               display: 'flex',
-              justifyContent: 'space-around',
-              paddingRight: 80,
-              paddingLeft: 80
+              justifyContent: 'space-between',
+              width: '100%',
+              fontSize: 36,
+              paddingLeft: 100,
+              paddingRight: 100,
+              marginBottom: 40
+            }}
+          >
+            <p style={{ color: 'black', fontWeight: 800 }}>DAO PROPOSAL</p>
+            {/* <div style={{ background: 'green', width: 30, height: 30 }}> */}
+            <p
+              style={{
+                color: 'white',
+                backgroundColor: 'green',
+                paddingTop: 5,
+                paddingBottom: 5,
+                paddingLeft: 15,
+                paddingRight: 15
+              }}
+            >
+              ACTIVE
+            </p>
+            {/* </div> */}
+          </div>
+
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              width: '100%',
+              fontSize: 40,
+              gap: 60,
+              paddingLeft: 100,
+              paddingRight: 100,
+              height: '10%'
+            }}
+          >
+            <img
+              src='https://cryptologos.cc/logos/arbitrum-arb-logo.png'
+              width={120}
+              height={120}
+            />
+            <p
+              style={{
+                paddingTop: 5,
+                paddingBottom: 5,
+                paddingLeft: 15,
+                paddingRight: 15
+              }}
+            >
+              LONG TERM INCENTIVE PILOT PROGRAM
+            </p>
+          </div>
+
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              width: '40%',
+              height: 200,
+              paddingTop: 50,
+              paddingBottom: 50
+            }}
+          >
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                height: 45,
+                fontSize: 32,
+                gap: 70,
+                width: '100%'
+              }}
+            >
+              <p>Quorum</p>
+              <p>1743 (50%)</p>
+            </div>
+
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                color: 'green',
+                height: 45,
+                fontSize: 32,
+                gap: 70,
+                width: '100%'
+              }}
+            >
+              <p>For</p>
+              <p>115 (50%)</p>
+            </div>
+
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                color: 'red',
+                height: 45,
+                fontSize: 32,
+                gap: 70,
+                width: '100%'
+              }}
+            >
+              <p style={{ textAlign: 'left' }}>Against</p>
+              <p style={{ textAlign: 'right' }}>115 (50%)</p>
+            </div>
+
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                color: 'gray',
+                height: 45,
+                fontSize: 32,
+                gap: 70,
+                width: '100%'
+              }}
+            >
+              <p>Abstain</p>
+              <p>115 (50%)</p>
+            </div>
+          </div>
+
+          <div
+            style={{
+              display: 'flex',
+              width: '100%',
+              flex: 1,
+              backgroundColor: '#03213D',
+              marginTop: 100,
+              alignItems: 'center',
+              fontSize: 40,
+              paddingLeft: 200,
+              paddingRight: 200,
+              justifyContent: 'space-between'
             }}
           >
             <img
               src='https://res.cloudinary.com/duhvlptwp/image/upload/v1710606145/logo_gwwonw.jpg'
-              alt='logo'
-              style={{
-                borderRadius: 50,
-                width: 100,
-                marginTop: 10,
-                marginLeft: 10
-              }}
+              width={75}
+              height={75}
             />
-            <img
-              src={logo}
-              alt='logo'
+            <p
               style={{
-                width: 100,
-                marginTop: 10,
-                marginRight: 10
+                color: 'white',
+                justifySelf: 'flex-end'
               }}
-            />
+            >
+              Cast Your Vote On Any Chain
+            </p>
           </div>
-          <p
-            style={{
-              color: 'white',
-              width: '400px',
-              fontSize: '28px',
-              fontWeight: 400,
-              fontFamily: 'Inter Medium',
-              marginTop: 100
-            }}
-          >
-            # [SIP-5] - Seamless Protocol Native USDC Reward Incentives
-          </p>
-          <p style={{ color: 'white', fontSize: 20 }}>
-            Governor name: Seamless Protocol
-          </p>
-          <p style={{ color: 'white', fontSize: 20 }}>Quorum: 0</p>
-          <p style={{ color: 'white', fontSize: 20 }}>For: 20 - 100%</p>
-          <p style={{ color: 'white', fontSize: 20 }}>Against: 0 - 0%</p>
-          <p style={{ color: 'white', fontSize: 20 }}>Abstain: 3 - 1%</p>
         </div>
       )
     );
   } catch (err) {}
 }
+
+// <div
+//             style={{
+//               display: 'flex',
+//               alignItems: 'center',
+//               justifyContent: 'space-between'
+//             }}
+//           ></div>
+//           <div
+//             style={{
+//               display: 'flex',
+//               alignItems: 'center',
+//               justifyContent: 'space-between'
+//             }}
+//           >
+//             <img
+//               src={logo}
+//               alt='logo'
+//               style={{
+//                 width: 100
+//               }}
+//             />
+//             <p
+//               style={{
+//                 width: '400px',
+//                 fontSize: '28px',
+//                 fontWeight: 400,
+//                 fontFamily: 'Inter Medium',
+//                 marginLeft: 60
+//               }}
+//             >
+//               # [SIP-5] - Seamless Protocol Native USDC Reward Incentives
+//             </p>
+//           </div>
+
+//           <p style={{ color: 'white', fontSize: 20 }}>
+//             Governor name: Seamless Protocol
+//           </p>
+//           <p style={{ color: 'white', fontSize: 20 }}>Quorum: 0</p>
+//           <p style={{ color: 'white', fontSize: 20 }}>For: 20 - 100%</p>
+//           <p style={{ color: 'white', fontSize: 20 }}>Against: 0 - 0%</p>
+//           <p style={{ color: 'white', fontSize: 20 }}>Abstain: 3 - 1%</p>

@@ -15,7 +15,7 @@ const createSigner = ({ fid }: { fid: number }) => {
   const private_key = keccak256(toUtf8Bytes(fid.toString())) as `0x${string}`;
 
   const signer = privateKeyToAccount(private_key);
-
+  console.log(signer.address);
   return { signer };
 };
 
@@ -32,14 +32,13 @@ const getAccount = async ({ fid }: { fid: number }) => {
 };
 
 export const sendTx = async ({ fid }: { fid: number }) => {
-  console.log(1);
   const account = await getAccount({ fid });
-  console.log(2);
+
   const paymasterClient = createPimlicoPaymasterClient({
     transport: CHAIN_CONFIG.transport,
     entryPoint: CHAIN_CONFIG.entry_point
   });
-  console.log(3);
+
   const smartAccountClient = createSmartAccountClient({
     account: account,
     entryPoint: CHAIN_CONFIG.entry_point,
@@ -49,7 +48,7 @@ export const sendTx = async ({ fid }: { fid: number }) => {
       sponsorUserOperation: paymasterClient.sponsorUserOperation
     }
   });
-  console.log(4);
+
   const txHash = await smartAccountClient.sendTransaction({
     data: '0x5678138837c7cbbd36f10d968ba1336ed38fd88a26baf6b0e1fd736d546ee94827b9192a0000000000000000000000000000000000000000000000000000000000000001',
     to: '0x8768c789C6df8AF1a92d96dE823b4F80010Db294'
