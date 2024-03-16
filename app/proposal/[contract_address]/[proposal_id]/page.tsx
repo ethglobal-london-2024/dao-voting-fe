@@ -1,4 +1,5 @@
 import { env } from '@/lib/config/env';
+import { fetchProposalDocuments } from '@/lib/utils/fetcher';
 import { getFrameMetadata } from '@coinbase/onchainkit/frame';
 import { Metadata } from 'next';
 
@@ -9,7 +10,11 @@ type CompoundPageProps = {
 const dog_img =
   'https://images.rawpixel.com/image_png_800/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvcHUyMzMxNzg4LWltYWdlLXJtNTAzLTAxXzEtbDBqOXFyYzMucG5n.png';
 
-export function generateMetadata({ params }: CompoundPageProps): Metadata {
+export async function generateMetadata({
+  params
+}: CompoundPageProps): Promise<Metadata> {
+  const { contract_address, proposal_id } = params;
+
   const frameMetadata = getFrameMetadata({
     buttons: [
       {
@@ -22,7 +27,7 @@ export function generateMetadata({ params }: CompoundPageProps): Metadata {
     image: {
       src: dog_img
     },
-    postUrl: `${env.NEXT_PUBLIC_URL}/api/compound/${params.slug}`
+    postUrl: `${env.NEXT_PUBLIC_URL}/api/proposal/${contract_address}/${proposal_id}`
   });
 
   return {
@@ -39,7 +44,7 @@ export function generateMetadata({ params }: CompoundPageProps): Metadata {
   };
 }
 
-export default function CompoundPage() {
+export default async function CompoundPage() {
   return (
     <>
       <h1>Compound Page</h1>

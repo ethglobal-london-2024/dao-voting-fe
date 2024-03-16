@@ -1,9 +1,14 @@
+import { fetchProposalDocuments } from '@/lib/utils/fetcher';
 import { ImageResponse } from 'next/og';
 
 export async function GET(
   request: Request,
-  { params }: { params: { slug: string } }
+  { params }: { params: { contract_address: string; proposal_id: string } }
 ) {
+  const proposal = await fetchProposalDocuments({
+    proposal_id: params.proposal_id
+  });
+
   return new ImageResponse(
     (
       <div
