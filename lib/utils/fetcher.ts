@@ -30,8 +30,10 @@ export const fetcher = ({ query, variables }: any) => {
 };
 
 export const fetchProposalDocuments = async ({
+  chain_id,
   proposal_id
 }: {
+  chain_id: string;
   proposal_id: string;
 }) => {
   const ProposalsDocument = `query Proposals($chainId: ChainID!, $proposalIds: [ID!], $pagination: Pagination, $sort: ProposalSort) {
@@ -54,11 +56,10 @@ export const fetchProposalDocuments = async ({
       `;
 
   try {
-    console.log('propID', proposal_id);
     return await fetcher({
       query: ProposalsDocument,
       variables: {
-        chainId: 'eip155:1',
+        chainId: `eip155:${chain_id}`,
         proposalIds: [proposal_id],
         pagination: { limit: 1, offset: 0 },
         sort: { field: 'START_BLOCK', order: 'DESC' }

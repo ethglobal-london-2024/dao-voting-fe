@@ -15,6 +15,7 @@ export async function GET(
 ) {
   try {
     const response = await fetchProposalDocuments({
+      chain_id: params.chain_id,
       proposal_id: params.proposal_id
     });
     const proposal = response.proposals[0];
@@ -40,7 +41,9 @@ export async function GET(
             textAlign: 'center',
             alignItems: 'center',
             flexDirection: 'column',
-            flexWrap: 'nowrap'
+            flexWrap: 'nowrap',
+            backgroundImage:
+              'linear-gradient(to right top, #051937, #004d7a, #008793, #00bf72, #a8eb12)'
           }}
         >
           <div
@@ -49,8 +52,8 @@ export async function GET(
               position: 'absolute',
               display: 'flex',
               justifyContent: 'space-around',
-              paddingRight: 70,
-              paddingLeft: 70
+              paddingRight: 80,
+              paddingLeft: 80
             }}
           >
             <img
