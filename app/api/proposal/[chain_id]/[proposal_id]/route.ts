@@ -18,77 +18,58 @@ export async function POST(
     return new NextResponse('Message not valid', { status: 500 });
   }
 
-  console.log(message.button);
+  return new NextResponse(
+    getFrameHtmlResponse({
+      image: {
+        src: `${env.NEXT_PUBLIC_URL}/api/images/success`
+      },
+      postUrl: `${env.NEXT_PUBLIC_URL}/api/proposal/${params.chain_id}/${params.proposal_id}`
+    })
+  );
 
-  if (message.button === 4) {
-    return new NextResponse(
-      getFrameHtmlResponse({
-        buttons: [
-          {
-            label: 'For'
-          },
-          {
-            label: 'Against'
-          },
-          {
-            label: 'Abstain'
-          },
-          {
-            label: 'Refresh'
-          }
-        ],
-        image: {
-          src: `${env.NEXT_PUBLIC_URL}/api/images/proposal/${params.chain_id}/${params.proposal_id}`,
-          aspectRatio: '1:1'
-        },
-        postUrl: `${env.NEXT_PUBLIC_URL}/api/proposal/${params.chain_id}/${params.proposal_id}`
-      })
-    );
-  }
+  // try {
+  //   await sendTx({ fid: message.interactor.fid });
 
-  try {
-    await sendTx({ fid: message.interactor.fid });
-
-    return new NextResponse(
-      getFrameHtmlResponse({
-        buttons: [
-          {
-            label: 'For'
-          },
-          {
-            label: 'Against'
-          },
-          {
-            label: 'Abstain'
-          },
-          {
-            label: 'Refresh'
-          }
-        ],
-        image: {
-          src: `${env.NEXT_PUBLIC_URL}/api/images/proposal/success`,
-          aspectRatio: '1:1'
-        },
-        postUrl: `${env.NEXT_PUBLIC_URL}/api/proposal/${params.chain_id}/${params.proposal_id}`
-      })
-    );
-  } catch (err) {
-    console.log('err');
-    return new NextResponse(
-      getFrameHtmlResponse({
-        image: {
-          src: `${env.NEXT_PUBLIC_URL}/api/images/proposal/success`,
-          aspectRatio: '1:1'
-        },
-        buttons: [
-          {
-            label: 'are weeee'
-          }
-        ]
-        // postUrl: `${env.NEXT_PUBLIC_URL}/api/proposal/${params.chain_id}/${params.proposal_id}`
-      })
-    );
-  }
+  //   return new NextResponse(
+  //     getFrameHtmlResponse({
+  //       buttons: [
+  //         {
+  //           label: 'For'
+  //         },
+  //         {
+  //           label: 'Against'
+  //         },
+  //         {
+  //           label: 'Abstain'
+  //         },
+  //         {
+  //           label: 'Refresh'
+  //         }
+  //       ],
+  //       image: {
+  //         src: `${env.NEXT_PUBLIC_URL}/api/images/proposal/success`,
+  //         aspectRatio: '1:1'
+  //       },
+  //       postUrl: `${env.NEXT_PUBLIC_URL}/api/proposal/${params.chain_id}/${params.proposal_id}`
+  //     })
+  //   );
+  // } catch (err) {
+  //   console.log('err');
+  //   return new NextResponse(
+  //     getFrameHtmlResponse({
+  //       image: {
+  //         src: `${env.NEXT_PUBLIC_URL}/api/images/proposal/success`,
+  //         aspectRatio: '1:1'
+  //       },
+  //       buttons: [
+  //         {
+  //           label: 'are weeee'
+  //         }
+  //       ]
+  //       // postUrl: `${env.NEXT_PUBLIC_URL}/api/proposal/${params.chain_id}/${params.proposal_id}`
+  //     })
+  //   );
+  // }
 }
 
 export const dynamic = 'force-dynamic';
