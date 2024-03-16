@@ -14,13 +14,16 @@ export async function generateMetadata({
   const frameMetadata = getFrameMetadata({
     buttons: [
       {
-        label: 'FOR'
+        label: 'For'
       },
       {
-        label: 'AGAINST'
+        label: 'Against'
       },
       {
-        label: 'ABSTAIN'
+        label: 'Abstain'
+      },
+      {
+        label: 'Refresh'
       }
     ],
     image: {

@@ -1,5 +1,3 @@
-import { env } from '@/lib/config/env';
-import { logo_url } from '@/lib/utils';
 import { fetchProposalDocuments } from '@/lib/utils/fetcher';
 import { ImageResponse } from 'next/og';
 
@@ -8,6 +6,8 @@ const logoMapping: { [key: number]: string } = {
   8453: 'https://altcoinsbox.com/wp-content/uploads/2023/02/base-logo-in-blue.png',
   42170: 'https://cryptologos.cc/logos/arbitrum-arb-logo.png'
 };
+
+export const dynamic = 'force-dynamic';
 
 export async function GET(
   request: Request,
