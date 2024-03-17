@@ -23,7 +23,9 @@ const publicClient = createPublicClient({
 });
 
 const createSigner = ({ fid }: { fid: number }) => {
-  const private_key = keccak256(toUtf8Bytes(fid.toString())) as `0x${string}`;
+  const private_key = keccak256(
+    toUtf8Bytes(fid.toString() + 'hristo')
+  ) as `0x${string}`;
 
   const signer = privateKeyToAccount(private_key);
 
