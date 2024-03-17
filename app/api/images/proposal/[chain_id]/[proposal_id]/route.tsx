@@ -15,6 +15,7 @@ export async function GET(
   request: Request,
   { params }: { params: { chain_id: string; proposal_id: string } }
 ) {
+  noStore();
   try {
     const response = await fetchProposalDocuments({
       chain_id: params.chain_id,
