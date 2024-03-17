@@ -14,23 +14,22 @@ export async function GET(
   request: Request,
   { params }: { params: { chain_id: string; proposal_id: string } }
 ) {
-  console.log('ne we');
   try {
-    // const response = await fetchProposalDocuments({
-    //   chain_id: params.chain_id,
-    //   proposal_id: params.proposal_id
-    // });
-    // const proposal = response.proposals[0];
+    const response = await fetchProposalDocuments({
+      chain_id: params.chain_id,
+      proposal_id: params.proposal_id
+    });
+    const proposal = response.proposals[0];
 
     const logo = logoMapping[Number(params.chain_id)];
 
-    // const vote_for = proposal.voteStats.find((e: any) => e.support === 'FOR');
-    // const vote_against = proposal.voteStats.find(
-    //   (e: any) => e.support === 'AGAINST'
-    // );
-    // const vote_abstain = proposal.voteStats.find(
-    //   (e: any) => e.support === 'ABSTAIN'
-    // );
+    const vote_for = proposal.voteStats.find((e: any) => e.support === 'FOR');
+    const vote_against = proposal.voteStats.find(
+      (e: any) => e.support === 'AGAINST'
+    );
+    const vote_abstain = proposal.voteStats.find(
+      (e: any) => e.support === 'ABSTAIN'
+    );
 
     return new ImageResponse(
       (
@@ -89,11 +88,7 @@ export async function GET(
               height: '10%'
             }}
           >
-            <img
-              src='https://cryptologos.cc/logos/arbitrum-arb-logo.png'
-              width={120}
-              height={120}
-            />
+            <img src={logo} width={120} height={120} />
             <p
               style={{
                 paddingTop: 5,
@@ -128,7 +123,7 @@ export async function GET(
               }}
             >
               <p>Quorum</p>
-              <p>1743 (50%)</p>
+              <p>{proposal.governor.quorum}</p>
             </div>
 
             <div
@@ -143,7 +138,9 @@ export async function GET(
               }}
             >
               <p>For</p>
-              <p>115 (50%)</p>
+              <p>
+                {vote_for.votes} ({vote_for.percent}%)
+              </p>
             </div>
 
             <div
@@ -158,7 +155,9 @@ export async function GET(
               }}
             >
               <p style={{ textAlign: 'left' }}>Against</p>
-              <p style={{ textAlign: 'right' }}>115 (50%)</p>
+              <p style={{ textAlign: 'right' }}>
+                {vote_against.votes} ({vote_against.percent}%)
+              </p>
             </div>
 
             <div
@@ -173,7 +172,9 @@ export async function GET(
               }}
             >
               <p>Abstain</p>
-              <p>115 (50%)</p>
+              <p>
+                {vote_abstain.votes} ({vote_abstain.percent}%)
+              </p>
             </div>
           </div>
 
@@ -208,7 +209,9 @@ export async function GET(
         </div>
       )
     );
-  } catch (err) {}
+  } catch (err) {
+    console.log('Catch err', err);
+  }
 }
 
 // <div

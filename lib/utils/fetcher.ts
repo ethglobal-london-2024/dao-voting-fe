@@ -44,6 +44,13 @@ export const fetchProposalDocuments = async ({
         governor {
           name
           quorum
+          contracts {
+            governor {
+              address
+              type
+              lastBlock
+            }
+          }
         }
         voteStats {
           support
