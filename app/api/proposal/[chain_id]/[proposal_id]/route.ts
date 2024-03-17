@@ -44,20 +44,6 @@ export async function POST(
 
     return new NextResponse(
       getFrameHtmlResponse({
-        buttons: [
-          {
-            label: 'For'
-          },
-          {
-            label: 'Against'
-          },
-          {
-            label: 'Abstain'
-          },
-          {
-            label: 'Refresh'
-          }
-        ],
         image: {
           src: `${env.NEXT_PUBLIC_URL}/api/images/proposal/success`,
           aspectRatio: '1:1'
