@@ -1,5 +1,6 @@
 import { fetchProposalDocuments } from '@/lib/utils/fetcher';
 import { ImageResponse } from 'next/og';
+import { unstable_noStore as noStore } from 'next/cache';
 
 const logoMapping: { [key: number]: string } = {
   10: 'https://cryptologos.cc/logos/optimism-ethereum-op-logo.png',
@@ -10,6 +11,7 @@ const logoMapping: { [key: number]: string } = {
 export const dynamic = 'force-dynamic';
 
 export async function GET(request: Request) {
+  noStore();
   try {
     return new ImageResponse(
       (
