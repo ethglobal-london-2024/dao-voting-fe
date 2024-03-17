@@ -19,15 +19,6 @@ export async function POST(
     return new NextResponse('Message not valid', { status: 500 });
   }
 
-  // return new NextResponse(
-  //   getFrameHtmlResponse({
-  //     image: {
-  //       src: `${env.NEXT_PUBLIC_URL}/api/images/success`
-  //     },
-  //     postUrl: `${env.NEXT_PUBLIC_URL}/api/proposal/${params.chain_id}/${params.proposal_id}`
-  //   })
-  // );
-
   try {
     const response = await fetchProposalDocuments({
       chain_id: params.chain_id,
@@ -45,28 +36,13 @@ export async function POST(
     return new NextResponse(
       getFrameHtmlResponse({
         image: {
-          src: `${env.NEXT_PUBLIC_URL}/api/images/proposal/success`,
-          aspectRatio: '1:1'
+          src: `${env.NEXT_PUBLIC_URL}/api/images/success`
         },
         postUrl: `${env.NEXT_PUBLIC_URL}/api/proposal/${params.chain_id}/${params.proposal_id}`
       })
     );
   } catch (err) {
-    console.log('err');
-    return new NextResponse(
-      getFrameHtmlResponse({
-        image: {
-          src: `${env.NEXT_PUBLIC_URL}/api/images/proposal/success`,
-          aspectRatio: '1:1'
-        },
-        buttons: [
-          {
-            label: 'are weeee'
-          }
-        ]
-        // postUrl: `${env.NEXT_PUBLIC_URL}/api/proposal/${params.chain_id}/${params.proposal_id}`
-      })
-    );
+    console.log('err', err);
   }
 }
 
