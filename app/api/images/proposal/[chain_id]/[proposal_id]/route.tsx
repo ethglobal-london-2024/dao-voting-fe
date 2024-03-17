@@ -207,51 +207,12 @@ export async function GET(
             </p>
           </div>
         </div>
-      )
+      ),
+      {
+        headers: { 'Content-type': 'image/jpeg' }
+      }
     );
   } catch (err) {
     console.log('Catch err', err);
   }
 }
-
-// <div
-//             style={{
-//               display: 'flex',
-//               alignItems: 'center',
-//               justifyContent: 'space-between'
-//             }}
-//           ></div>
-//           <div
-//             style={{
-//               display: 'flex',
-//               alignItems: 'center',
-//               justifyContent: 'space-between'
-//             }}
-//           >
-//             <img
-//               src={logo}
-//               alt='logo'
-//               style={{
-//                 width: 100
-//               }}
-//             />
-//             <p
-//               style={{
-//                 width: '400px',
-//                 fontSize: '28px',
-//                 fontWeight: 400,
-//                 fontFamily: 'Inter Medium',
-//                 marginLeft: 60
-//               }}
-//             >
-//               # [SIP-5] - Seamless Protocol Native USDC Reward Incentives
-//             </p>
-//           </div>
-
-//           <p style={{ color: 'white', fontSize: 20 }}>
-//             Governor name: Seamless Protocol
-//           </p>
-//           <p style={{ color: 'white', fontSize: 20 }}>Quorum: 0</p>
-//           <p style={{ color: 'white', fontSize: 20 }}>For: 20 - 100%</p>
-//           <p style={{ color: 'white', fontSize: 20 }}>Against: 0 - 0%</p>
-//           <p style={{ color: 'white', fontSize: 20 }}>Abstain: 3 - 1%</p>

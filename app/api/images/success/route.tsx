@@ -31,7 +31,10 @@ export async function GET(request: Request) {
             style={{ width: '100%', height: '100%' }}
           />
         </div>
-      )
+      ),
+      {
+        headers: { 'Content-type': 'image/jpeg' }
+      }
     );
   } catch (err) {}
 }
