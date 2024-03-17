@@ -27,7 +27,7 @@ export async function GET(request: Request) {
           }}
         >
           <img
-            src='https://res.cloudinary.com/duhvlptwp/image/upload/v1710631522/success_logo2_wznf99.jpg'
+            src='https://res.cloudinary.com/duhvlptwp/image/upload/v1710643646/logo_vvrapm.jpg'
             style={{ width: '100%', height: '100%' }}
           />
         </div>
