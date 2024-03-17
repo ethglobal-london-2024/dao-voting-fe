@@ -21,8 +21,6 @@ export async function GET(
     });
     const proposal = response.proposals[0];
 
-    const logo = logoMapping[Number(params.chain_id)];
-
     const vote_for = proposal.voteStats.find((e: any) => e.support === 'FOR');
     const vote_against = proposal.voteStats.find(
       (e: any) => e.support === 'AGAINST'
@@ -88,7 +86,11 @@ export async function GET(
               height: '10%'
             }}
           >
-            <img src={logo} width={120} height={120} />
+            <img
+              src='https://miro.medium.com/v2/resize:fit:2400/1*apIXKOfr7TglP83z7_rzWQ.jpeg'
+              width={120}
+              height={120}
+            />
             <p
               style={{
                 paddingTop: 5,
