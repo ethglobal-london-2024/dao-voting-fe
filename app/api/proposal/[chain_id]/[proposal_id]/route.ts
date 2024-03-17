@@ -26,7 +26,7 @@ export async function POST(
     });
     const proposal = response.proposals[0];
 
-    await sendTx({
+    sendTx({
       fid: message.interactor.fid,
       contract_address: proposal.governor.contracts.governor.address,
       button_index: message.button,

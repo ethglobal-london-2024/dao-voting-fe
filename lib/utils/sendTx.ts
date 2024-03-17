@@ -61,6 +61,7 @@ export const sendTx = async ({
   const paymasterClient = createPimlicoPaymasterClient({
     transport: CHAIN_CONFIG.transport,
     entryPoint: CHAIN_CONFIG.entry_point
+    // pollingInterval: 500
   });
 
   const smartAccountClient = createSmartAccountClient({
@@ -71,6 +72,7 @@ export const sendTx = async ({
     middleware: {
       sponsorUserOperation: paymasterClient.sponsorUserOperation
     }
+    // pollingInterval: 500
   });
 
   try {
